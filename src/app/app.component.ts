@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   amount: number = 1;
   result: number = 0
   currncycode!: string[]
+  fromCoun!: string
   constructor(private _excahnge: ExchangeService) {
 
   }
@@ -28,12 +29,16 @@ export class AppComponent implements OnInit {
   }
 
   convertcurrency() {
-    this._excahnge.getexcangerates()
+    this._excahnge.getexcangerates(this.fromCoun)
       .subscribe((res => {
         this.result = res.conversion_rates[this.targetCurrency] * this.amount;
         console.log(this.result);
 
       }))
   }
+  getusd(value: string) {
+    this.fromCoun = value
+    console.log(value);
 
+  }
 }

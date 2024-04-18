@@ -8,18 +8,21 @@ import { Currency } from '../model/interface';
   providedIn: 'root'
 })
 export class ExchangeService {
-  currncyurl = `${environment.baseurl}/latest/USD`
+  currncyurl = `${environment.baseurl}/latest/`
   constructor(private _http: HttpClient) { }
 
 
-  getexcangerates(): Observable<any> {
-    return this._http.get(this.currncyurl)
+  getexcangerates(basecode: string = 'USD'): Observable<any> {
+    let finalurl = `${this.currncyurl}/${basecode}`
+    console.log(finalurl);
+
+    return this._http.get(finalurl)
   }
 
-  getcodes():Observable<any> {
- return   this._http.get(this.currncyurl)
+  getcodes(basecode: string = 'USD'): Observable<any> {
+    return this._http.get(`${this.currncyurl}/${basecode}`)
       .pipe(
-        map((res:any)=>{
+        map((res: any) => {
           let arr: Array<any> = []
           for (const key in res.conversion_rates) {
             arr.push(key)

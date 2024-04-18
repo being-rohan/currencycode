@@ -4,7 +4,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="">From:</label>
-        <select name="" id="" [(ngModel)]="basecurrency" class="form-control">
+        <select name="" #fromcoun id="" [(ngModel)]="basecurrency"(change)="getusd(fromcoun.value)" class="form-control">
           <option [value]="curr" *ngFor="let curr of currncycode" class="form-control">
           {{curr}}</option>
         </select>
